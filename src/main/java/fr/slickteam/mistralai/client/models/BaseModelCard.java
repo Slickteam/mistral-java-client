@@ -1,11 +1,13 @@
 package fr.slickteam.mistralai.client.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
  * Represents a base model card with metadata and capabilities.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseModelCard {
 
     /**
