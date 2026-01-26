@@ -2,6 +2,7 @@ package fr.slickteam.mistralai.client.sdk;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.slickteam.mistralai.client.lib.Config;
 import fr.slickteam.mistralai.client.models.CompletionStreamEvent;
@@ -98,18 +99,21 @@ public class Fim extends ApiResource {
     private String createFIMCompletionRequestJson(FIMCompletionRequest request) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         return objectMapper.writeValueAsString(request);
     }
 
     private String createFIMCompletionStreamRequestJson(FIMCompletionStreamRequest request) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         return objectMapper.writeValueAsString(request);
     }
 
     private FIMCompletionResponse parseFIMCompletionResponse(String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         return objectMapper.readValue(json, FIMCompletionResponse.class);
     }
 
@@ -139,6 +143,7 @@ public class Fim extends ApiResource {
     private CompletionStreamEvent parseCompletionEvent(String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         return objectMapper.readValue(json, CompletionStreamEvent.class);
     }
 }

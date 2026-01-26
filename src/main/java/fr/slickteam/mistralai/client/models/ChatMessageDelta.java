@@ -1,5 +1,9 @@
 package fr.slickteam.mistralai.client.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
+
 /**
  * Represents a delta in a chat message, which encapsulates any changes or updates
  * made to a chat message. A delta typically includes the role of the sender
@@ -25,12 +29,21 @@ public class ChatMessageDelta {
      */
     private String content;
 
+    @JsonProperty("tool_calls")
+    private List<ToolCall> toolCalls;
+
     public ChatMessageDelta() {
     }
 
     public ChatMessageDelta(String role, String content) {
         this.role = role;
         this.content = content;
+    }
+
+    public ChatMessageDelta(String role, String content, List<ToolCall> toolCalls) {
+        this.role = role;
+        this.content = content;
+        this.toolCalls = toolCalls;
     }
 
     public String getRole() {
@@ -49,11 +62,20 @@ public class ChatMessageDelta {
         this.content = content;
     }
 
+    public List<ToolCall> getToolCalls() {
+        return toolCalls;
+    }
+
+    public void setToolCalls(List<ToolCall> toolCalls) {
+        this.toolCalls = toolCalls;
+    }
+
     @Override
     public String toString() {
         return "ChatMessageDelta{" +
                 "role='" + role + '\'' +
                 ", content='" + content + '\'' +
+                ", toolCalls=" + toolCalls +
                 '}';
     }
 

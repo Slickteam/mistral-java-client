@@ -1,26 +1,24 @@
 package fr.slickteam.mistralai.client.sdk;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.slickteam.mistralai.client.lib.Config;
-import fr.slickteam.mistralai.client.models.OCRBlock;
-import fr.slickteam.mistralai.client.models.OCRRequest;
-import fr.slickteam.mistralai.client.models.OCRResponse;
-import fr.slickteam.mistralai.client.utils.JSONUtils;
+import fr.slickteam.mistralai.client.models.ocr.OCRRequest;
+import fr.slickteam.mistralai.client.models.ocr.OCRResponse;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
 
 import static fr.slickteam.mistralai.client.utils.ContentTypes.APPLICATION_JSON;
 
 /**
  * API resource for interacting with OCR (Optical Character Recognition) functionality.
+ * This implementation is based on the updated OpenAPI specification.
  */
 public class Ocr extends ApiResource {
+    
+    private final ObjectMapper objectMapper;
+
     /**
      * Creates a new OCR API resource with the specified options.
      *
@@ -28,6 +26,7 @@ public class Ocr extends ApiResource {
      */
     public Ocr(Config.SDKOptions options) {
         super(options);
+        this.objectMapper = new ObjectMapper();
     }
 
     /**
@@ -39,8 +38,8 @@ public class Ocr extends ApiResource {
      * @throws InterruptedException If the operation is interrupted
      */
     public OCRResponse process(OCRRequest request) throws IOException, InterruptedException {
-        // Convert request to JSON
-        String requestBody = createOCRRequestJson(request);
+        // Convert request to JSON using Jackson
+        String requestBody = objectMapper.writeValueAsString(request);
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(createURI("/v1/ocr"))
@@ -52,87 +51,9 @@ public class Ocr extends ApiResource {
         HttpResponse<String> response = sendRequest(httpRequest);
 
         if (response.statusCode() == 200) {
-            return parseOCRResponse(response.body());
+            return objectMapper.readValue(response.body(), OCRResponse.class);
         } else {
-            throw new IOException("Failed to process OCR request: " + response.statusCode());
+            throw new IOException("Failed to process OCR request: " + response.statusCode() + " - " + response.body());
         }
     }
-
-    // Helper methods
-    private String createOCRRequestJson(OCRRequest request) throws IOException {
-        StringBuilder json = new StringBuilder();
-        json.append("{");
-
-        // Add model if present
-        if (request.model != null && !request.model.isEmpty()) {
-            json.append("\"model\":\"").append(request.model).append("\"");
-        }
-
-        // Add image
-        if (json.length() > 1) {
-            json.append(",");
-        }
-
-        if (request.image != null) {
-            if (request.image instanceof File) {
-                // If image is a File, read it and encode as base64
-                File file = (File) request.image;
-                byte[] fileContent = Files.readAllBytes(file.toPath());
-                String base64Image = Base64.getEncoder().encodeToString(fileContent);
-                json.append("\"image\":\"").append(base64Image).append("\"");
-            } else if (request.image instanceof String) {
-                // If image is already a base64 string
-                json.append("\"image\":\"").append(request.image).append("\"");
-            } else if (request.image instanceof byte[]) {
-                // If image is a byte array
-                String base64Image = Base64.getEncoder().encodeToString((byte[]) request.image);
-                json.append("\"image\":\"").append(base64Image).append("\"");
-            }
-        }
-
-        json.append("}");
-        return json.toString();
-    }
-
-    private OCRResponse parseOCRResponse(String json) {
-        OCRResponse response = new OCRResponse();
-        response.id = JSONUtils.extractValue(json, "id");
-        response.model = JSONUtils.extractValue(json, "model");
-        response.text = JSONUtils.extractValue(json, "text");
-
-        // Parse blocks if present
-        List<OCRBlock> blocks = new ArrayList<>();
-        String blocksJson = JSONUtils.extractArray(json, "blocks");
-        if (blocksJson != null && !blocksJson.isEmpty()) {
-            String[] blockEntries = blocksJson.split("\\{");
-            for (int i = 1; i < blockEntries.length; i++) {
-                String blockJson = "{" + blockEntries[i];
-                int endIndex = blockJson.lastIndexOf("}");
-                if (endIndex > 0) {
-                    blockJson = blockJson.substring(0, endIndex + 1);
-                    OCRBlock block = new OCRBlock();
-                    block.text = JSONUtils.extractValue(blockJson, "text");
-
-                    // Parse bounding box
-                    String bboxJson = JSONUtils.extractArray(blockJson, "bbox");
-                    if (bboxJson != null && !bboxJson.isEmpty()) {
-                        String[] values = bboxJson.replaceAll("[\\[\\]]", "").split(",");
-                        if (values.length == 4) {
-                            block.bbox = new int[4];
-                            for (int j = 0; j < 4; j++) {
-                                block.bbox[j] = Integer.parseInt(values[j].trim());
-                            }
-                        }
-                    }
-
-                    blocks.add(block);
-                }
-            }
-        }
-        response.blocks = blocks;
-
-        return response;
-    }
-
-
 }

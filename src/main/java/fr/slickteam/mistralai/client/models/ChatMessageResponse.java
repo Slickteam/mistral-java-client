@@ -2,6 +2,8 @@ package fr.slickteam.mistralai.client.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 /**
  * Represents a message in a chat, typically exchanged between a user and a system or among users.
  * Each message includes details about the role of the sender, the message content, and optionally, the sender's name.
@@ -41,12 +43,12 @@ public class ChatMessageResponse {
      * It can be used to track or log tool usage within the conversation flow.
      */
     @JsonProperty("tool_calls")
-    private String toolCalls;
+    private List<ToolCall> toolCalls;
 
     public ChatMessageResponse() {
     }
 
-    public ChatMessageResponse(String role, String content, String name, String toolCalls) {
+    public ChatMessageResponse(String role, String content, String name, List<ToolCall> toolCalls) {
         this.role = role;
         this.content = content;
         this.name = name;
@@ -77,21 +79,21 @@ public class ChatMessageResponse {
         this.name = name;
     }
 
-    public String getToolCalls() {
+    public List<ToolCall> getToolCalls() {
         return toolCalls;
     }
 
-    public void setToolCalls(String toolCalls) {
+    public void setToolCalls(List<ToolCall> toolCalls) {
         this.toolCalls = toolCalls;
     }
 
     @Override
     public String toString() {
-        return "ChatMessage{" +
+        return "ChatMessageResponse{" +
                 "role='" + role + '\'' +
                 ", content='" + content + '\'' +
                 ", name='" + name + '\'' +
-                ", tool_calls='" + toolCalls + '\'' +
+                ", toolCalls=" + toolCalls +
                 '}';
     }
 }

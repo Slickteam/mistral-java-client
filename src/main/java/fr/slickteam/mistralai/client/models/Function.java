@@ -1,19 +1,30 @@
 package fr.slickteam.mistralai.client.models;
 
+import java.util.Map;
+
 public class Function {
 
-    public String name;
+    private String name;
 
-    public String description;
+    private String description = "";
 
-    public String parameters;
+    private Boolean strict = false;
+
+    private Map<String, Object> parameters;
 
     public Function() {
     }
 
-    public Function(String name, String description, String parameters) {
+    public Function(String name, String description, Map<String, Object> parameters) {
         this.name = name;
         this.description = description;
+        this.parameters = parameters;
+    }
+
+    public Function(String name, String description, Boolean strict, Map<String, Object> parameters) {
+        this.name = name;
+        this.description = description;
+        this.strict = strict;
         this.parameters = parameters;
     }
 
@@ -33,11 +44,19 @@ public class Function {
         this.description = description;
     }
 
-    public String getParameters() {
+    public Boolean getStrict() {
+        return strict;
+    }
+
+    public void setStrict(Boolean strict) {
+        this.strict = strict;
+    }
+
+    public Map<String, Object> getParameters() {
         return parameters;
     }
 
-    public void setParameters(String parameters) {
+    public void setParameters(Map<String, Object> parameters) {
         this.parameters = parameters;
     }
 
@@ -46,7 +65,8 @@ public class Function {
         return "Function{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", parameters='" + parameters + '\'' +
+                ", strict=" + strict +
+                ", parameters=" + parameters +
                 '}';
     }
 

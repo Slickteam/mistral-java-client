@@ -10,7 +10,7 @@ repositories {
 }
 
 group = "fr.slickteam.mistralai"
-version = "0.2.0"
+version = "0.3.0"
 description = "Java client for Mistral AI - based on official Typescript client"
 
 java {

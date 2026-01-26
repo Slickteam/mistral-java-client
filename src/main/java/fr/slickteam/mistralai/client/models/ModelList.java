@@ -5,13 +5,14 @@ import java.util.List;
 
 /**
  * List of models.
+ * Now uses BaseModelCard instead of the old Model class to match the updated OpenAPI spec.
  */
 public class ModelList {
     @JsonProperty("object")
     private String object;
     
     @JsonProperty("data")
-    private List<Model> data;
+    private List<BaseModelCard> data;
     
     /**
      * Default constructor for Jackson deserialization
@@ -42,7 +43,7 @@ public class ModelList {
      *
      * @return The list of models
      */
-    public List<Model> getData() {
+    public List<BaseModelCard> getData() {
         return data;
     }
 
@@ -51,7 +52,7 @@ public class ModelList {
      *
      * @param data The list of models
      */
-    public void setData(List<Model> data) {
+    public void setData(List<BaseModelCard> data) {
         this.data = data;
     }
 }

@@ -1,6 +1,7 @@
 package fr.slickteam.mistralai.client.sdk;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import fr.slickteam.mistralai.client.lib.Config;
@@ -48,6 +49,7 @@ public class Chat extends ApiResource {
         // Convert request to JSON
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         objectMapper.registerModule(new JavaTimeModule());
         String requestBody = objectMapper.writeValueAsString(request);
 
@@ -90,6 +92,7 @@ public class Chat extends ApiResource {
         // Convert request to JSON
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         String requestBody = objectMapper.writeValueAsString(request);
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
@@ -115,6 +118,7 @@ public class Chat extends ApiResource {
         StringBuilder eventData = new StringBuilder();
         String line;
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         while ((line = reader.readLine()) != null) {
             if (line.startsWith("data: ")) {

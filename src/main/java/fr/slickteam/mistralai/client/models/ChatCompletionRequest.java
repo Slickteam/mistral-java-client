@@ -1,8 +1,10 @@
 package fr.slickteam.mistralai.client.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.slickteam.mistralai.client.type.MistralPromptMode;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a request for generating chat completions using a specified model and configuration parameters.
@@ -131,6 +133,29 @@ public class ChatCompletionRequest {
     @JsonProperty("response_format")
     private ResponseFormat responseFormat;
 
+    private List<Tool> tools;
+
+    @JsonProperty("tool_choice")
+    private Object toolChoice;
+
+    @JsonProperty("presence_penalty")
+    private Double presencePenalty;
+
+    @JsonProperty("frequency_penalty")
+    private Double frequencyPenalty;
+
+    private Integer n;
+
+    private Prediction prediction;
+
+    @JsonProperty("parallel_tool_calls")
+    private Boolean parallelToolCalls;
+
+    @JsonProperty("prompt_mode")
+    private MistralPromptMode promptMode;
+
+    private Map<String, Object> metadata;
+
     public ChatCompletionRequest() {
     }
 
@@ -229,6 +254,78 @@ public class ChatCompletionRequest {
         this.responseFormat = responseFormat;
     }
 
+    public List<Tool> getTools() {
+        return tools;
+    }
+
+    public void setTools(List<Tool> tools) {
+        this.tools = tools;
+    }
+
+    public Object getToolChoice() {
+        return toolChoice;
+    }
+
+    public void setToolChoice(Object toolChoice) {
+        this.toolChoice = toolChoice;
+    }
+
+    public Double getPresencePenalty() {
+        return presencePenalty;
+    }
+
+    public void setPresencePenalty(Double presencePenalty) {
+        this.presencePenalty = presencePenalty;
+    }
+
+    public Double getFrequencyPenalty() {
+        return frequencyPenalty;
+    }
+
+    public void setFrequencyPenalty(Double frequencyPenalty) {
+        this.frequencyPenalty = frequencyPenalty;
+    }
+
+    public Integer getN() {
+        return n;
+    }
+
+    public void setN(Integer n) {
+        this.n = n;
+    }
+
+    public Prediction getPrediction() {
+        return prediction;
+    }
+
+    public void setPrediction(Prediction prediction) {
+        this.prediction = prediction;
+    }
+
+    public Boolean getParallelToolCalls() {
+        return parallelToolCalls;
+    }
+
+    public void setParallelToolCalls(Boolean parallelToolCalls) {
+        this.parallelToolCalls = parallelToolCalls;
+    }
+
+    public MistralPromptMode getPromptMode() {
+        return promptMode;
+    }
+
+    public void setPromptMode(MistralPromptMode promptMode) {
+        this.promptMode = promptMode;
+    }
+
+    public Map<String, Object> getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(Map<String, Object> metadata) {
+        this.metadata = metadata;
+    }
+
     @Override
     public String toString() {
         return "ChatCompletionRequest{" +
@@ -242,6 +339,15 @@ public class ChatCompletionRequest {
                 ", safePrompt=" + safePrompt +
                 ", stop=" + stop +
                 ", responseFormat=" + responseFormat +
+                ", tools=" + tools +
+                ", toolChoice=" + toolChoice +
+                ", presencePenalty=" + presencePenalty +
+                ", frequencyPenalty=" + frequencyPenalty +
+                ", n=" + n +
+                ", prediction=" + prediction +
+                ", parallelToolCalls=" + parallelToolCalls +
+                ", promptMode=" + promptMode +
+                ", metadata=" + metadata +
                 '}';
     }
 

@@ -43,16 +43,30 @@ public class ChatMessage {
      * It can be used to track or log tool usage within the conversation flow.
      */
     @JsonProperty("tool_calls")
-    private String toolCalls;
+    private List<ToolCall> toolCalls;
+
+    @JsonProperty("tool_call_id")
+    private String toolCallId;
+
+    private Boolean prefix;
 
     public ChatMessage() {
     }
 
-    public ChatMessage(String role, List<ChatMessageContent> content, String name, String toolCalls) {
+    public ChatMessage(String role, List<ChatMessageContent> content, String name, List<ToolCall> toolCalls) {
         this.role = role;
         this.content = content;
         this.name = name;
         this.toolCalls = toolCalls;
+    }
+
+    public ChatMessage(String role, List<ChatMessageContent> content, String name, List<ToolCall> toolCalls, String toolCallId, Boolean prefix) {
+        this.role = role;
+        this.content = content;
+        this.name = name;
+        this.toolCalls = toolCalls;
+        this.toolCallId = toolCallId;
+        this.prefix = prefix;
     }
 
     public String getRole() {
@@ -79,21 +93,39 @@ public class ChatMessage {
         this.name = name;
     }
 
-    public String getToolCalls() {
+    public List<ToolCall> getToolCalls() {
         return toolCalls;
     }
 
-    public void setToolCalls(String toolCalls) {
+    public void setToolCalls(List<ToolCall> toolCalls) {
         this.toolCalls = toolCalls;
+    }
+
+    public String getToolCallId() {
+        return toolCallId;
+    }
+
+    public void setToolCallId(String toolCallId) {
+        this.toolCallId = toolCallId;
+    }
+
+    public Boolean getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(Boolean prefix) {
+        this.prefix = prefix;
     }
 
     @Override
     public String toString() {
         return "ChatMessage{" +
                 "role='" + role + '\'' +
-                ", content='" + content + '\'' +
+                ", content=" + content +
                 ", name='" + name + '\'' +
-                ", tool_calls='" + toolCalls + '\'' +
+                ", toolCalls=" + toolCalls +
+                ", toolCallId='" + toolCallId + '\'' +
+                ", prefix=" + prefix +
                 '}';
     }
 }

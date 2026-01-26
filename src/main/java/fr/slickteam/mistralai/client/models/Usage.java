@@ -33,6 +33,9 @@ public class Usage {
     @JsonProperty("total_tokens")
     public int totalTokens;
 
+    @JsonProperty("prompt_audio_seconds")
+    private Integer promptAudioSeconds;
+
     public Usage() {
     }
 
@@ -40,6 +43,13 @@ public class Usage {
         this.promptTokens = promptTokens;
         this.completionTokens = completionTokens;
         this.totalTokens = totalTokens;
+    }
+
+    public Usage(int promptTokens, int completionTokens, int totalTokens, Integer promptAudioSeconds) {
+        this.promptTokens = promptTokens;
+        this.completionTokens = completionTokens;
+        this.totalTokens = totalTokens;
+        this.promptAudioSeconds = promptAudioSeconds;
     }
 
     public int getPromptTokens() {
@@ -66,12 +76,21 @@ public class Usage {
         this.totalTokens = totalTokens;
     }
 
+    public Integer getPromptAudioSeconds() {
+        return promptAudioSeconds;
+    }
+
+    public void setPromptAudioSeconds(Integer promptAudioSeconds) {
+        this.promptAudioSeconds = promptAudioSeconds;
+    }
+
     @Override
     public String toString() {
         return "Usage{" +
                 "promptTokens=" + promptTokens +
                 ", completionTokens=" + completionTokens +
                 ", totalTokens=" + totalTokens +
+                ", promptAudioSeconds=" + promptAudioSeconds +
                 '}';
     }
 }

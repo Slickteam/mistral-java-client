@@ -1,6 +1,7 @@
 package fr.slickteam.mistralai.client.sdk;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.slickteam.mistralai.client.lib.Config;
 import fr.slickteam.mistralai.client.models.EmbeddingRequest;
@@ -43,6 +44,7 @@ public class Embeddings extends ApiResource {
         // Convert request to JSON using Jackson
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         String requestBody = objectMapper.writeValueAsString(request);
 
         log.log(System.Logger.Level.TRACE, "Request body: " + requestBody);

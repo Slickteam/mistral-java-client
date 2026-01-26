@@ -1,11 +1,13 @@
 package fr.slickteam.mistralai.client.sdk;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.slickteam.mistralai.client.lib.Config;
 import fr.slickteam.mistralai.client.models.ArchiveModelResponse;
+import fr.slickteam.mistralai.client.models.BaseModelCard;
 import fr.slickteam.mistralai.client.models.DeleteModelResponse;
-import fr.slickteam.mistralai.client.models.Model;
+import fr.slickteam.mistralai.client.models.FTModelCard;
 import fr.slickteam.mistralai.client.models.ModelList;
 import fr.slickteam.mistralai.client.models.UnarchiveModelResponse;
 
@@ -30,6 +32,7 @@ public class Models extends ApiResource {
         super(options);
         this.objectMapper = new ObjectMapper();
         this.objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        this.objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
     }
 
     /**
@@ -59,11 +62,11 @@ public class Models extends ApiResource {
      * Retrieve Model
      *
      * @param modelId The ID of the model to retrieve
-     * @return Information about the model
+     * @return Information about the model (BaseModelCard or FTModelCard)
      * @throws IOException          If an I/O error occurs
      * @throws InterruptedException If the operation is interrupted
      */
-    public Model retrieve(String modelId) throws IOException, InterruptedException {
+    public BaseModelCard retrieve(String modelId) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(createURI("/v1/models/" + modelId))
                 .header("Accept", APPLICATION_JSON)
@@ -113,7 +116,7 @@ public class Models extends ApiResource {
      * @throws IOException          If an I/O error occurs
      * @throws InterruptedException If the operation is interrupted
      */
-    public Model update(String modelId, String name, String description) throws IOException, InterruptedException {
+    public BaseModelCard update(String modelId, String name, String description) throws IOException, InterruptedException {
         // Create JSON request body using Jackson
         class UpdateRequest {
             private String name;
@@ -209,9 +212,14 @@ public class Models extends ApiResource {
         }
     }
 
-    private Model parseModel(String json) {
+    private BaseModelCard parseModel(String json) {
         try {
-            return objectMapper.readValue(json, Model.class);
+            // Try to parse as FTModelCard first, fall back to BaseModelCard
+            try {
+                return objectMapper.readValue(json, FTModelCard.class);
+            } catch (IOException e) {
+                return objectMapper.readValue(json, BaseModelCard.class);
+            }
         } catch (IOException e) {
             throw new RuntimeException("Failed to parse model response", e);
         }
