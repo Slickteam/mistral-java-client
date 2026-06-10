@@ -1,11 +1,11 @@
 package fr.slickteam.mistralai.client.sdk;
 
 import fr.slickteam.mistralai.client.lib.Config;
-import fr.slickteam.mistralai.client.models.Hyperparameters;
-import fr.slickteam.mistralai.client.models.JobRequest;
-import fr.slickteam.mistralai.client.models.JobResponse;
-import fr.slickteam.mistralai.client.models.JobResult;
-import fr.slickteam.mistralai.client.models.JobsResponse;
+import fr.slickteam.mistralai.client.model.Hyperparameters;
+import fr.slickteam.mistralai.client.model.JobRequest;
+import fr.slickteam.mistralai.client.model.JobResponse;
+import fr.slickteam.mistralai.client.model.JobResult;
+import fr.slickteam.mistralai.client.model.JobsResponse;
 import fr.slickteam.mistralai.client.utils.JSONUtils;
 
 import java.io.IOException;

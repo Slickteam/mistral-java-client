@@ -1,7 +1,8 @@
 package fr.slickteam.mistralai.client.models;
 
+import fr.slickteam.mistralai.client.model.*;
 import fr.slickteam.mistralai.client.type.MistralPromptMode;
-import fr.slickteam.mistralai.client.type.ResponseFormatType;
+import fr.slickteam.mistralai.client.type.ResponseFormats;
 import fr.slickteam.mistralai.client.type.ToolTypes;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,8 @@ class ChatCompletionRequestTest {
                 "user",
                 List.of(new ChatMessageContent("text", "Hello", null)),
                 null,
+                null,
+                null,
                 null
         )));
         req.setTemperature(0.2);
@@ -28,7 +31,7 @@ class ChatCompletionRequestTest {
         req.setStream(false);
         req.setSafePrompt(true);
         req.setStop(List.of("\n\n"));
-        req.setResponseFormat(new ResponseFormat(ResponseFormatType.JSON_OBJECT, null));
+        req.setResponseFormat(new ResponseFormat(ResponseFormats.JSON_OBJECT, null));
 
         // New fields
         req.setN(1);
@@ -37,8 +40,8 @@ class ChatCompletionRequestTest {
         req.setParallelToolCalls(true);
         req.setPromptMode(MistralPromptMode.REASONING);
         req.setMetadata(Map.of("key", "value"));
-        
-        Tool tool = new Tool(ToolTypes.FUNCTION.getValue(), new Function("func", "desc", Map.of("p", "v")));
+
+        Tool tool = new Tool(ToolTypes.FUNCTION, new Function("func", "desc", false, Map.of("p", "v")));
         req.setTools(List.of(tool));
         req.setToolChoice("auto");
 
@@ -53,7 +56,7 @@ class ChatCompletionRequestTest {
         assertTrue(req.getSafePrompt());
         assertEquals(List.of("\n\n"), req.getStop());
         assertNotNull(req.getResponseFormat());
-        
+
         assertEquals(1, req.getN());
         assertEquals(0.1, req.getPresencePenalty());
         assertEquals(0.1, req.getFrequencyPenalty());

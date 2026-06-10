@@ -1,9 +1,9 @@
 package fr.slickteam.mistralai.client.sdk;
 
 import fr.slickteam.mistralai.client.lib.Config;
-import fr.slickteam.mistralai.client.models.BatchJobRequest;
-import fr.slickteam.mistralai.client.models.BatchJobResponse;
-import fr.slickteam.mistralai.client.models.BatchJobsResponse;
+import fr.slickteam.mistralai.client.model.BatchJobRequest;
+import fr.slickteam.mistralai.client.model.BatchJobResponse;
+import fr.slickteam.mistralai.client.model.BatchJobsResponse;
 import fr.slickteam.mistralai.client.utils.JSONUtils;
 
 import java.io.IOException;

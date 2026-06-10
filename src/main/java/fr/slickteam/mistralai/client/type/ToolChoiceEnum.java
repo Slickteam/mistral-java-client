@@ -2,6 +2,9 @@ package fr.slickteam.mistralai.client.type;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * Control which (if any) tool is called by the model.
+ */
 public enum ToolChoiceEnum {
     AUTO("auto"),
     NONE("none"),

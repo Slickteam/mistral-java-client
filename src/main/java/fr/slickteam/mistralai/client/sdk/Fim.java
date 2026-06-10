@@ -5,10 +5,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.slickteam.mistralai.client.lib.Config;
-import fr.slickteam.mistralai.client.models.CompletionStreamEvent;
-import fr.slickteam.mistralai.client.models.FIMCompletionRequest;
-import fr.slickteam.mistralai.client.models.FIMCompletionResponse;
-import fr.slickteam.mistralai.client.models.FIMCompletionStreamRequest;
+import fr.slickteam.mistralai.client.model.CompletionStreamEvent;
+import fr.slickteam.mistralai.client.model.FIMCompletionRequest;
+import fr.slickteam.mistralai.client.model.FIMCompletionResponse;
+import fr.slickteam.mistralai.client.model.FIMCompletionStreamRequest;
 
 import java.io.IOException;
 import java.io.InputStream;

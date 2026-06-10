@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.slickteam.mistralai.client.lib.Config;
-import fr.slickteam.mistralai.client.models.EmbeddingRequest;
-import fr.slickteam.mistralai.client.models.EmbeddingResponse;
+import fr.slickteam.mistralai.client.model.EmbeddingRequest;
+import fr.slickteam.mistralai.client.model.EmbeddingResponse;
 
 import java.io.IOException;
 import java.net.http.HttpRequest;

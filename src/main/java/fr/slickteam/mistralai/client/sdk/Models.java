@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.slickteam.mistralai.client.lib.Config;
-import fr.slickteam.mistralai.client.models.ArchiveModelResponse;
-import fr.slickteam.mistralai.client.models.BaseModelCard;
-import fr.slickteam.mistralai.client.models.DeleteModelResponse;
-import fr.slickteam.mistralai.client.models.FTModelCard;
-import fr.slickteam.mistralai.client.models.ModelList;
-import fr.slickteam.mistralai.client.models.UnarchiveModelResponse;
+import fr.slickteam.mistralai.client.model.ArchiveModelResponse;
+import fr.slickteam.mistralai.client.model.BaseModelCard;
+import fr.slickteam.mistralai.client.model.DeleteModelResponse;
+import fr.slickteam.mistralai.client.model.FTModelCard;
+import fr.slickteam.mistralai.client.model.ModelList;
+import fr.slickteam.mistralai.client.model.UnarchiveModelResponse;
 
 import java.io.IOException;
 import java.net.http.HttpRequest;

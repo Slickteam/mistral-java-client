@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.slickteam.mistralai.client.lib.Config;
-import fr.slickteam.mistralai.client.models.AgentsCompletionRequest;
-import fr.slickteam.mistralai.client.models.AgentsCompletionStreamRequest;
-import fr.slickteam.mistralai.client.models.ChatCompletionResponse;
-import fr.slickteam.mistralai.client.models.ChatCompletionStreamEvent;
+import fr.slickteam.mistralai.client.model.AgentsCompletionRequest;
+import fr.slickteam.mistralai.client.model.AgentsCompletionStreamRequest;
+import fr.slickteam.mistralai.client.model.ChatCompletionResponse;
+import fr.slickteam.mistralai.client.model.ChatCompletionStreamEvent;
 import fr.slickteam.mistralai.client.utils.ContentTypes;
 
 import java.io.IOException;

@@ -5,9 +5,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import fr.slickteam.mistralai.client.lib.Config;
-import fr.slickteam.mistralai.client.models.ChatCompletionRequest;
-import fr.slickteam.mistralai.client.models.ChatCompletionResponse;
-import fr.slickteam.mistralai.client.models.ChatCompletionStreamEvent;
+import fr.slickteam.mistralai.client.model.ChatCompletionRequest;
+import fr.slickteam.mistralai.client.model.ChatCompletionResponse;
+import fr.slickteam.mistralai.client.model.ChatCompletionStreamEvent;
 
 import java.io.IOException;
 import java.io.InputStream;

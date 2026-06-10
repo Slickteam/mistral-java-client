@@ -2,14 +2,14 @@ package fr.slickteam.mistralai.client.sdk;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.slickteam.mistralai.client.lib.Config;
-import fr.slickteam.mistralai.client.models.*;
+import fr.slickteam.mistralai.client.model.*;
 
 import java.io.IOException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import static fr.slickteam.mistralai.client.models.ClassificationResponse.parseClassificationResponse;
-import static fr.slickteam.mistralai.client.models.ModerationResponse.parseModerationResponse;
+import static fr.slickteam.mistralai.client.model.ClassificationResponse.parseClassificationResponse;
+import static fr.slickteam.mistralai.client.model.ModerationResponse.parseModerationResponse;
 import static fr.slickteam.mistralai.client.utils.ContentTypes.APPLICATION_JSON;
 
 /**

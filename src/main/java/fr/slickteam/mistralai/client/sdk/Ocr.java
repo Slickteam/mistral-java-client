@@ -2,8 +2,8 @@ package fr.slickteam.mistralai.client.sdk;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.slickteam.mistralai.client.lib.Config;
-import fr.slickteam.mistralai.client.models.ocr.OCRRequest;
-import fr.slickteam.mistralai.client.models.ocr.OCRResponse;
+import fr.slickteam.mistralai.client.model.ocr.OCRRequest;
+import fr.slickteam.mistralai.client.model.ocr.OCRResponse;
 
 import java.io.IOException;
 import java.net.http.HttpRequest;
