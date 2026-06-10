@@ -3,6 +3,7 @@ package fr.slickteam.mistralai.client.model;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import fr.slickteam.mistralai.client.type.FinishReason;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -54,8 +55,8 @@ class ChatResponseTest {
         assertEquals(1, response.choices().size());
         ChatChoice choice = response.choices().get(0);
         assertEquals(0, choice.index());
-        assertEquals("assistant", ((ChatMessage)choice.message()).role());
-        assertEquals("Hello!", ((ChatMessage)choice.message()).content());
+        assertEquals("assistant", choice.message().role());
+        assertEquals("Hello!", choice.message().content());
         assertEquals(FinishReason.STOP, choice.finish_reason());
     }
 

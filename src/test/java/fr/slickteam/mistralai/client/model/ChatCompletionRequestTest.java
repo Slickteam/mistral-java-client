@@ -1,4 +1,4 @@
-package fr.slickteam.mistralai.client.models;
+package fr.slickteam.mistralai.client.model;
 
 import fr.slickteam.mistralai.client.model.*;
 import fr.slickteam.mistralai.client.type.MistralPromptMode;
@@ -18,7 +18,7 @@ class ChatCompletionRequestTest {
         req.setModel("mistral-small-latest");
         req.setMessages(List.of(new ChatMessage(
                 "user",
-                List.of(new ChatMessageContent("text", "Hello", null)),
+                "Hello",
                 null,
                 null,
                 null,
@@ -41,13 +41,15 @@ class ChatCompletionRequestTest {
         req.setPromptMode(MistralPromptMode.REASONING);
         req.setMetadata(Map.of("key", "value"));
 
-        Tool tool = new Tool(ToolTypes.FUNCTION, new Function("func", "desc", false, Map.of("p", "v")));
+        Tool tool = new Tool(ToolTypes.FUNCTION, new Function("func", "desc", null, null));
         req.setTools(List.of(tool));
         req.setToolChoice("auto");
 
         assertEquals("mistral-small-latest", req.getModel());
         assertNotNull(req.getMessages());
         assertEquals(1, req.getMessages().size());
+        assertEquals("user", req.getMessages().get(0).role());
+        assertEquals("Hello", req.getMessages().get(0).content());
         assertEquals(0.2, req.getTemperature());
         assertEquals(128, req.getMaxTokens());
         assertEquals(0.9, req.getTopP());
@@ -64,6 +66,8 @@ class ChatCompletionRequestTest {
         assertEquals(MistralPromptMode.REASONING, req.getPromptMode());
         assertEquals("value", req.getMetadata().get("key"));
         assertEquals(1, req.getTools().size());
+        assertEquals(ToolTypes.FUNCTION, req.getTools().get(0).type());
+        assertEquals("func", req.getTools().get(0).function().name());
         assertEquals("auto", req.getToolChoice());
     }
 }
