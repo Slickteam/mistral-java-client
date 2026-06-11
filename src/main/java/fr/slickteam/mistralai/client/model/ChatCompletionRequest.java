@@ -11,28 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Represents a request for generating chat completions using a specified model and configuration parameters.
+ * Chat completion request.
  * <p>
- * This class encapsulates the necessary data required to initiate a chat completion process,
- * including the model identifier, conversation context (messages), and various fine-tuning parameters
- * such as the maximum number of tokens, randomness levels, and safety checks.
+ * Used in `POST /v1/chat/completions` endpoint.
  * <p>
- * Fields:
- * - model: Specifies the unique identifier of the model to be used for generating chat completions.
- * - messages: The list of chat messages forming the conversation context. Each message contains details
- * such as role (e.g., system, user) and content.
- * - temperature: Controls the randomness of the response. Higher values increase randomness,
- * while lower values make the output more deterministic.
- * - maxTokens: Indicates the maximum number of tokens allowed in the response. This defines
- * the upper limit for the model's output length.
- * - topP: Enables nucleus sampling, determining the probability threshold for token selection
- * during response generation. Accepts values in the range [0, 1].
- * - randomSeed: An optional seed value for reproducibility of results. Using the same seed
- * ensures consistent output for identical inputs and configurations.
- * - stream: Specifies whether the response should be streamed back incrementally. If true,
- * the response is delivered in parts as it is generated.
- * - safePrompt: Determines whether the input prompt undergoes a safety validation check to
- * comply with safety and compliance standards.
+ * Contains model identifier, messages, temperature, max_tokens, top_p, random_seed, stream, safe_prompt, stop, response_format, tools, tool_choice, presence_penalty, frequency_penalty.
  */
 public class ChatCompletionRequest {
 

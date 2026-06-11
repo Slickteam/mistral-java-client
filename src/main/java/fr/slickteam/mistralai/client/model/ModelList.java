@@ -3,8 +3,9 @@ package fr.slickteam.mistralai.client.model;
 import java.util.List;
 
 /**
- * Represents a list of models available in the Mistral AI API.
- * This class is returned by the list models endpoint and contains information about all available models.
+ * List of models available in the Mistral AI API.
+ * <p>
+ * Returned by `GET /v1/models` endpoint.
  */
 public record ModelList(
     /**

@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * Represents a model with metadata and associated permissions.
- *
+ * Model entity from Mistral AI API.
+ * <p>
+ * Represents a model with its unique identifier, type, creation timestamp, and associated metadata.
+ * Used in `/v1/models` and `/v1/models/{model_id}` endpoints.
  */
 public class Model {
 

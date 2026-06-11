@@ -3,8 +3,9 @@ package fr.slickteam.mistralai.client.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Represents a fine-tuned model card with metadata and capabilities.
- * Extends BaseModelCard with additional fine-tuning specific fields.
+ * Fine-tuned model information.
+ * <p>
+ * Returned by `GET /v1/models/{model_id}` for fine-tuned models.
  */
 public class FTModelCard extends BaseModelCard {
 

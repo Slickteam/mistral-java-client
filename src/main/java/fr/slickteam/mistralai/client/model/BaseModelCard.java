@@ -3,9 +3,9 @@ package fr.slickteam.mistralai.client.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Represents information about a base model in the Mistral AI API.
- * This class contains details about a specific model, such as its identifier, type, creation date,
- * owner, and properties.
+ * Base model information.
+ * <p>
+ * Returned by `GET /v1/models/{model_id}` for base models.
  */
 public class BaseModelCard {
 
