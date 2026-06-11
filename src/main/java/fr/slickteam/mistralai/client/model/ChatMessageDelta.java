@@ -8,7 +8,6 @@ package fr.slickteam.mistralai.client.model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import fr.slickteam.mistralai.client.model.ToolCall;
 
 import java.util.List;
 
