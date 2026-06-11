@@ -14,7 +14,12 @@ import java.net.http.HttpResponse;
 import static fr.slickteam.mistralai.client.utils.ContentTypes.APPLICATION_JSON;
 
 /**
- * API resource for interacting with embeddings.
+ * # Embeddings API
+ * 
+ * API resource for creating embeddings.
+ * 
+ * ## Endpoints
+ * - `POST /v1/embeddings` - [Create embeddings](#embeddings)
  */
 public class Embeddings extends ApiResource {
 
@@ -30,8 +35,9 @@ public class Embeddings extends ApiResource {
     }
 
     /**
-     * Embeddings
      * Creates embeddings for the given input.
+     * <p>
+     * `POST /v1/embeddings`
      *
      * @param request The embedding request
      * @return The embedding response

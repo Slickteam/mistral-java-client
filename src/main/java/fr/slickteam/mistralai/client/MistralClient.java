@@ -1,13 +1,13 @@
 package fr.slickteam.mistralai.client;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.slickteam.mistralai.client.model.*;
-import fr.slickteam.mistralai.client.model.agent.*;
+import fr.slickteam.mistralai.client.model.agent.AgentAliasResponse;
 import fr.slickteam.mistralai.client.model.conversation.*;
 import fr.slickteam.mistralai.client.model.library.*;
-import fr.slickteam.mistralai.client.model.ocr.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.slickteam.mistralai.client.model.ocr.OcrResponse;
+import fr.slickteam.mistralai.client.models.OcrRequest;
 
 import java.io.IOException;
 import java.net.URI;
@@ -25,16 +25,24 @@ import java.util.UUID;
  * including chat completions, embeddings, OCR, models, files, and fine-tuning.
  */
 public class MistralClient {
-    /** The HTTP client used for making API requests. */
+    /**
+     * The HTTP client used for making API requests.
+     */
     private final HttpClient httpClient;
 
-    /** The object mapper used for JSON serialization/deserialization. */
+    /**
+     * The object mapper used for JSON serialization/deserialization.
+     */
     private final ObjectMapper objectMapper;
 
-    /** The API key used for authentication with the Mistral AI API. */
+    /**
+     * The API key used for authentication with the Mistral AI API.
+     */
     private final String apiKey;
 
-    /** The base URL of the Mistral AI API. */
+    /**
+     * The base URL of the Mistral AI API.
+     */
     private final String baseUrl;
 
     /**
@@ -49,7 +57,7 @@ public class MistralClient {
     /**
      * Creates a new MistralClient with the specified API key and base URL.
      *
-     * @param apiKey the API key for authentication
+     * @param apiKey  the API key for authentication
      * @param baseUrl the base URL of the Mistral AI API
      */
     public MistralClient(String apiKey, String baseUrl) {
@@ -63,19 +71,20 @@ public class MistralClient {
     }
 
     // Chat API
+
     /**
      * Sends a chat completion request to the Mistral AI API with the specified model and messages.
      * This is a convenience method that creates a ChatRequest with the provided parameters.
      *
-     * @param model the model to use for the chat completion
+     * @param model    the model to use for the chat completion
      * @param messages the list of messages in the conversation
      * @return the chat completion response from the API
      */
     public ChatResponse chat(String model, List<ChatMessage> messages) {
         return chat(ChatRequest.builder()
-            .model(model)
-            .messages(messages)
-            .build());
+                .model(model)
+                .messages(messages)
+                .build());
     }
 
     /**
@@ -90,6 +99,7 @@ public class MistralClient {
     }
 
     // Embeddings API
+
     /**
      * Generates embeddings for the specified input texts using the specified model.
      * This is a convenience method that creates an EmbeddingRequest with the provided parameters.
@@ -100,9 +110,9 @@ public class MistralClient {
      */
     public EmbeddingResponse embeddings(String model, List<String> input) {
         return embeddings(EmbeddingRequest.builder()
-            .model(model)
-            .input(input)
-            .build());
+                .model(model)
+                .input(input)
+                .build());
     }
 
     /**
@@ -117,6 +127,7 @@ public class MistralClient {
     }
 
     // OCR API
+
     /**
      * Performs optical character recognition (OCR) on the specified files using the specified model.
      * This is a convenience method that creates an OcrRequest with the provided parameters.
@@ -127,9 +138,9 @@ public class MistralClient {
      */
     public OcrResponse ocr(String model, List<String> files) {
         return ocr(OcrRequest.builder()
-            .model(model)
-            .files(files)
-            .build());
+                .model(model)
+                .files(files)
+                .build());
     }
 
     /**
@@ -144,6 +155,7 @@ public class MistralClient {
     }
 
     // FIM API
+
     /**
      * Sends a FIM completion request to the Mistral AI API.
      *
@@ -155,6 +167,7 @@ public class MistralClient {
     }
 
     // Agents API
+
     /**
      * Sends an agents completion request to the Mistral AI API.
      *
@@ -166,6 +179,7 @@ public class MistralClient {
     }
 
     // Conversations API
+
     /**
      * Creates a new conversation.
      *
@@ -179,7 +193,7 @@ public class MistralClient {
     /**
      * Lists all conversations.
      *
-     * @param page the page number (default: 0)
+     * @param page     the page number (default: 0)
      * @param pageSize the number of items per page (default: 100)
      * @param metadata optional metadata filter
      * @return a list of conversations (ModelConversation or AgentConversation)
@@ -225,7 +239,7 @@ public class MistralClient {
      * Appends entries to a conversation.
      *
      * @param conversationId the ID of the conversation
-     * @param request the append request
+     * @param request        the append request
      * @return the conversation response
      */
     public ConversationResponse appendToConversation(String conversationId, ConversationAppendRequest request) {
@@ -256,7 +270,7 @@ public class MistralClient {
      * Restarts a conversation from a given entry.
      *
      * @param conversationId the ID of the conversation to restart
-     * @param request the restart request
+     * @param request        the restart request
      * @return the conversation response
      */
     public ConversationResponse restartConversation(String conversationId, ConversationRestartRequest request) {
@@ -264,6 +278,7 @@ public class MistralClient {
     }
 
     // Moderations API
+
     /**
      * Sends a moderation request to the Mistral AI API.
      *
@@ -285,6 +300,7 @@ public class MistralClient {
     }
 
     // Models API
+
     /**
      * Lists all models available to the user.
      *
@@ -305,18 +321,19 @@ public class MistralClient {
     }
 
     // Files API
+
     /**
      * Lists files that belong to the user's organization.
      *
-     * @param page the page number (0-based) for pagination
+     * @param page     the page number (0-based) for pagination
      * @param pageSize the number of items per page
-     * @param purpose filter files by purpose
+     * @param purpose  filter files by purpose
      * @return a list of files
      */
     public ListFilesOut listFiles(Integer page, Integer pageSize, String purpose) {
-        String url = String.format("/v1/files?page=%d&page_size=%d", 
-            page != null ? page : 0, 
-            pageSize != null ? pageSize : 100);
+        String url = String.format("/v1/files?page=%d&page_size=%d",
+                page != null ? page : 0,
+                pageSize != null ? pageSize : 100);
         if (purpose != null) {
             url += "&purpose=" + purpose;
         }
@@ -402,7 +419,7 @@ public class MistralClient {
      * Uploads a file that can be used across various endpoints.
      *
      * @param filePath the path to the file to upload
-     * @param purpose the purpose of the file
+     * @param purpose  the purpose of the file
      * @return information about the uploaded file
      */
     public FileObject uploadFile(String filePath, String purpose) {
@@ -410,6 +427,7 @@ public class MistralClient {
     }
 
     // Libraries API
+
     /**
      * Lists libraries.
      *
@@ -443,7 +461,7 @@ public class MistralClient {
      * Updates an existing library.
      *
      * @param libraryId the ID of the library to update
-     * @param request the update request
+     * @param request   the update request
      * @return information about the updated library
      */
     public LibraryOut updateLibrary(UUID libraryId, LibraryIn request) {
@@ -464,15 +482,15 @@ public class MistralClient {
      * Lists documents in a specific library.
      *
      * @param libraryId the ID of the library
-     * @param page the page number
-     * @param pageSize the number of items per page
+     * @param page      the page number
+     * @param pageSize  the number of items per page
      * @return a list of documents
      */
     public ListDocumentOut listLibraryDocuments(UUID libraryId, Integer page, Integer pageSize) {
         String url = String.format("/v1/libraries/%s/documents?page=%d&page_size=%d",
-            libraryId,
-            page != null ? page : 0,
-            pageSize != null ? pageSize : 100);
+                libraryId,
+                page != null ? page : 0,
+                pageSize != null ? pageSize : 100);
         return sendGetRequest(url, ListDocumentOut.class);
     }
 
@@ -480,7 +498,7 @@ public class MistralClient {
      * Uploads a document to a library.
      *
      * @param libraryId the ID of the library
-     * @param filePath the path to the file to upload
+     * @param filePath  the path to the file to upload
      * @return information about the uploaded document
      */
     public DocumentOut uploadLibraryDocument(UUID libraryId, String filePath) {
@@ -490,7 +508,7 @@ public class MistralClient {
     /**
      * Gets the status of a document in a library.
      *
-     * @param libraryId the ID of the library
+     * @param libraryId  the ID of the library
      * @param documentId the ID of the document
      * @return the document status
      */
@@ -501,7 +519,7 @@ public class MistralClient {
     /**
      * Gets a signed URL for a document in a library.
      *
-     * @param libraryId the ID of the library
+     * @param libraryId  the ID of the library
      * @param documentId the ID of the document
      * @return the signed URL for the document
      */
@@ -512,7 +530,7 @@ public class MistralClient {
     /**
      * Gets a signed URL for extracted text from a document.
      *
-     * @param libraryId the ID of the library
+     * @param libraryId  the ID of the library
      * @param documentId the ID of the document
      * @return the signed URL for extracted text
      */
@@ -523,7 +541,7 @@ public class MistralClient {
     /**
      * Reprocesses a document in a library.
      *
-     * @param libraryId the ID of the library
+     * @param libraryId  the ID of the library
      * @param documentId the ID of the document
      * @return the reprocess response
      */
@@ -542,10 +560,11 @@ public class MistralClient {
     }
 
     // Audio API
+
     /**
      * Creates a transcription for the specified audio file.
      *
-     * @param request the transcription request
+     * @param request  the transcription request
      * @param filePath the path to the audio file (optional if file_id or file_url is provided)
      * @return the transcription response from the API
      */
@@ -583,14 +602,14 @@ public class MistralClient {
     /**
      * Lists agents.
      *
-     * @param page the page number
+     * @param page     the page number
      * @param pageSize the number of items per page
      * @return a list of agents
      */
     public ListAgentsOut listAgents(Integer page, Integer pageSize) {
         String url = String.format("/v1/agents?page=%d&page_size=%d",
-            page != null ? page : 0,
-            pageSize != null ? pageSize : 20);
+                page != null ? page : 0,
+                pageSize != null ? pageSize : 20);
         return sendGetRequest(url, ListAgentsOut.class);
     }
 
@@ -649,8 +668,8 @@ public class MistralClient {
     /**
      * Lists all versions of an agent.
      *
-     * @param agentId the ID of the agent
-     * @param page the page number (default: 0)
+     * @param agentId  the ID of the agent
+     * @param page     the page number (default: 0)
      * @param pageSize the number of versions per page (default: 20)
      * @return a list of agent versions
      */
@@ -682,7 +701,7 @@ public class MistralClient {
      * Creates or updates an agent alias.
      *
      * @param agentId the ID of the agent
-     * @param alias the alias name
+     * @param alias   the alias name
      * @param version the version number to point to
      * @return the alias response
      */
@@ -704,28 +723,29 @@ public class MistralClient {
      * Deletes an agent alias.
      *
      * @param agentId the ID of the agent
-     * @param alias the alias name to delete
+     * @param alias   the alias name to delete
      */
     public void deleteAgentAlias(String agentId, String alias) {
         sendDeleteRequestNoResponse("/v1/agents/" + agentId + "/aliases?alias=" + alias);
     }
 
     // Fine-tuning API
+
     /**
      * Lists fine-tuning jobs.
      *
-     * @param page the page number (0-based) for pagination
-     * @param pageSize the number of items per page
-     * @param model filter jobs by model name
+     * @param page        the page number (0-based) for pagination
+     * @param pageSize    the number of items per page
+     * @param model       filter jobs by model name
      * @param createdByMe when true, only return jobs created by the API caller
-     * @param status filter jobs by status
+     * @param status      filter jobs by status
      * @return a list of fine-tuning jobs
      */
-    public JobsOut listFineTuningJobs(Integer page, Integer pageSize, String model, 
-            Boolean createdByMe, String status) {
+    public JobsOut listFineTuningJobs(Integer page, Integer pageSize, String model,
+                                      Boolean createdByMe, String status) {
         StringBuilder url = new StringBuilder(String.format("/v1/fine_tuning/jobs?page=%d&page_size=%d",
-            page != null ? page : 0,
-            pageSize != null ? pageSize : 100));
+                page != null ? page : 0,
+                pageSize != null ? pageSize : 100));
 
         if (model != null) url.append("&model=").append(model);
         if (createdByMe != null) url.append("&created_by_me=").append(createdByMe);
@@ -795,6 +815,7 @@ public class MistralClient {
     }
 
     // Batch API
+
     /**
      * Creates a batch job.
      *
@@ -808,7 +829,7 @@ public class MistralClient {
     /**
      * Lists batch jobs.
      *
-     * @param cursor the cursor for pagination
+     * @param cursor   the cursor for pagination
      * @param pageSize the number of items per page
      * @return a list of batch jobs
      */
@@ -841,12 +862,13 @@ public class MistralClient {
     }
 
     // Helper methods for HTTP requests
+
     /**
      * Sends a GET request to the specified path and deserializes the response to the specified type.
      *
-     * @param path the API endpoint path
+     * @param path         the API endpoint path
      * @param responseType the class to deserialize the response to
-     * @param <T> the type of the response
+     * @param <T>          the type of the response
      * @return the deserialized response
      * @throws MistralApiException if the request fails or the response cannot be deserialized
      */
@@ -893,10 +915,10 @@ public class MistralClient {
     /**
      * Sends a POST request with a JSON body to the specified path and deserializes the response to the specified type.
      *
-     * @param path the API endpoint path
-     * @param body the request body to serialize to JSON
+     * @param path         the API endpoint path
+     * @param body         the request body to serialize to JSON
      * @param responseType the class to deserialize the response to
-     * @param <T> the type of the response
+     * @param <T>          the type of the response
      * @return the deserialized response
      * @throws MistralApiException if the request fails or the response cannot be deserialized
      */
@@ -922,11 +944,11 @@ public class MistralClient {
     /**
      * Sends a multipart/form-data POST request to upload a file.
      *
-     * @param path the API endpoint path
-     * @param filePath the path to the file to upload
-     * @param fields additional form fields to include in the request
+     * @param path         the API endpoint path
+     * @param filePath     the path to the file to upload
+     * @param fields       additional form fields to include in the request
      * @param responseType the class to deserialize the response to
-     * @param <T> the type of the response
+     * @param <T>          the type of the response
      * @return the deserialized response
      * @throws MistralApiException if the request fails or the response cannot be deserialized
      */
@@ -943,9 +965,9 @@ public class MistralClient {
     /**
      * Sends a DELETE request to the specified path and deserializes the response to the specified type.
      *
-     * @param path the API endpoint path
+     * @param path         the API endpoint path
      * @param responseType the class to deserialize the response to
-     * @param <T> the type of the response
+     * @param <T>          the type of the response
      * @return the deserialized response
      * @throws MistralApiException if the request fails or the response cannot be deserialized
      */
@@ -991,9 +1013,9 @@ public class MistralClient {
     /**
      * Sends a PATCH request to the specified path and deserializes the response.
      *
-     * @param path the API endpoint path
+     * @param path         the API endpoint path
      * @param responseType the class to deserialize the response to
-     * @param <T> the type of the response
+     * @param <T>          the type of the response
      * @return the deserialized response
      * @throws MistralApiException if the request fails
      */
@@ -1018,9 +1040,9 @@ public class MistralClient {
     /**
      * Sends a PUT request to the specified path and deserializes the response.
      *
-     * @param path the API endpoint path
+     * @param path         the API endpoint path
      * @param responseType the class to deserialize the response to
-     * @param <T> the type of the response
+     * @param <T>          the type of the response
      * @return the deserialized response
      * @throws MistralApiException if the request fails
      */
@@ -1046,7 +1068,7 @@ public class MistralClient {
      * Validates the HTTP response and throws an exception if the status code indicates an error.
      *
      * @param response the HTTP response to validate
-     * @param <T> the type of the response body
+     * @param <T>      the type of the response body
      * @throws MistralApiException if the status code is 400 or higher
      */
     private <T> void validateResponse(HttpResponse<T> response) {
@@ -1061,7 +1083,7 @@ public class MistralClient {
      *
      * @param json the JSON string to deserialize
      * @param type the class to deserialize to
-     * @param <T> the type to deserialize to
+     * @param <T>  the type to deserialize to
      * @return the deserialized object
      * @throws MistralApiException if the JSON cannot be deserialized
      */

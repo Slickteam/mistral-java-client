@@ -1,4 +1,4 @@
-package fr.slickteam.mistralai.client.model;
+package fr.slickteam.mistralai.client.models;
 
 import java.util.List;
 

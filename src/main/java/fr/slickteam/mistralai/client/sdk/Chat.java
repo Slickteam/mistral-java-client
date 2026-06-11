@@ -19,7 +19,15 @@ import static fr.slickteam.mistralai.client.utils.ContentTypes.APPLICATION_JSON;
 import static fr.slickteam.mistralai.client.utils.ContentTypes.EVENT_STREAM;
 
 /**
- * API resource for interacting with chat functionality.
+ * # Chat API
+ * 
+ * API resource for chat completions and moderations.
+ * 
+ * ## Endpoints
+ * - `POST /v1/chat/completions` - [Chat completion](#complete)
+ * - `POST /v1/chat/completions` (stream) - [Streaming chat completion](#completeStream)
+ * - `POST /v1/chat/moderations` - [Chat moderation](#moderate)
+ * - `POST /v1/chat/classifications` - [Chat classification](#classify)
  */
 public class Chat extends ApiResource {
 
@@ -35,7 +43,9 @@ public class Chat extends ApiResource {
     }
 
     /**
-     * Chat Completion
+     * Chat completion.
+     * <p>
+     * `POST /v1/chat/completions`
      *
      * @param request The chat completion request
      * @return The chat completion response
@@ -75,15 +85,17 @@ public class Chat extends ApiResource {
     }
 
     /**
-     * Stream chat completion
-     * Mistral AI provides the ability to stream responses back to a client in order to allow partial results for certain requests.
+     * Stream chat completion.
+     * <p>
+     * Mistral AI provides the ability to stream responses back to a client in order to allow partial results.
      * Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message.
-     * Otherwise, the server will hold the request open until the timeout or until completion, with the response containing the full result as JSON.
+     * <p>
+     * `POST /v1/chat/completions` (stream)
      *
      * @param request      The chat completion stream request
      * @param eventHandler The handler for completion events
      * @throws IOException          If an I/O error occurs
-     * @throws InterruptedException If the operation is interrupted
+     * @throws InterruptedException If the operation is intercepted
      */
     public void stream(ChatCompletionRequest request, Consumer<ChatCompletionStreamEvent> eventHandler) throws IOException, InterruptedException {
         // Set stream to true

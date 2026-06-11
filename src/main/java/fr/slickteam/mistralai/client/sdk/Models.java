@@ -18,7 +18,14 @@ import java.net.http.HttpResponse;
 import static fr.slickteam.mistralai.client.utils.ContentTypes.APPLICATION_JSON;
 
 /**
- * API resource for interacting with models.
+ * # Models API
+ * 
+ * API resource for managing Mistral AI models.
+ * 
+ * ## Endpoints
+ * - `GET /v1/models` - [List all models available to the user](#list)
+ * - `GET /v1/models/{model_id}` - [Retrieve information about a model](#retrieve)
+ * - `DELETE /v1/models/{model_id}` - [Delete a fine-tuned model](#delete)
  */
 public class Models extends ApiResource {
     private final ObjectMapper objectMapper;
@@ -36,8 +43,10 @@ public class Models extends ApiResource {
     }
 
     /**
-     * List Models
-     *
+     * List all models available to the user.
+     * <p>
+     * `GET /v1/models`
+     * 
      * @return A list of available models
      * @throws IOException          If an I/O error occurs
      * @throws InterruptedException If the operation is interrupted
@@ -59,8 +68,10 @@ public class Models extends ApiResource {
     }
 
     /**
-     * Retrieve Model
-     *
+     * Retrieve information about a model.
+     * <p>
+     * `GET /v1/models/{model_id}`
+     * 
      * @param modelId The ID of the model to retrieve
      * @return Information about the model (BaseModelCard or FTModelCard)
      * @throws IOException          If an I/O error occurs
@@ -83,8 +94,10 @@ public class Models extends ApiResource {
     }
 
     /**
-     * Delete Model
-     *
+     * Delete a fine-tuned model.
+     * <p>
+     * `DELETE /v1/models/{model_id}`
+     * 
      * @param modelId The ID of the model to delete
      * @return The deletion status
      * @throws IOException          If an I/O error occurs
@@ -107,8 +120,10 @@ public class Models extends ApiResource {
     }
 
     /**
-     * Update Fine Tuned Model
-     *
+     * Update a fine-tuned model's name and description.
+     * <p>
+     * `PATCH /v1/models/{model_id}`
+     * 
      * @param modelId     The ID of the model to update
      * @param name        The new name for the model
      * @param description The new description for the model
@@ -156,8 +171,10 @@ public class Models extends ApiResource {
     }
 
     /**
-     * Archive Fine Tuned Model
-     *
+     * Archive a fine-tuned model.
+     * <p>
+     * `POST /v1/models/{model_id}/archive`
+     * 
      * @param modelId The ID of the model to archive
      * @return The archive status
      * @throws IOException          If an I/O error occurs
@@ -180,8 +197,10 @@ public class Models extends ApiResource {
     }
 
     /**
-     * Unarchive Fine Tuned Model
-     *
+     * Unarchive a fine-tuned model.
+     * <p>
+     * `POST /v1/models/{model_id}/unarchive`
+     * 
      * @param modelId The ID of the model to unarchive
      * @return The unarchive status
      * @throws IOException          If an I/O error occurs

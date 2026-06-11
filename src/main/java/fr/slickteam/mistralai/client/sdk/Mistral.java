@@ -4,7 +4,23 @@ import fr.slickteam.mistralai.client.lib.ClientSDK;
 import fr.slickteam.mistralai.client.lib.Config;
 
 /**
+ * # Mistral AI Java SDK
+ * 
  * Main SDK class for interacting with the Mistral AI API.
+ * 
+ * ## Available APIs
+ * - {@link #getModels()} - Models API for managing AI models
+ * - {@link #getFiles()} - Files API for file upload/download/management
+ * - {@link #getChat()} - Chat API for chat completions and moderations
+ * - {@link #getEmbeddings()} - Embeddings API for creating embeddings
+ * - {@link #getFineTuning()} - Fine-tuning API for model fine-tuning
+ * - {@link #getBatch()} - Batch API for batch inference jobs
+ * - {@link #getFim()} - FIM (Fill in the Middle) API
+ * - {@link #getAgents()} - Agents API for managing AI agents
+ * - {@link #getClassifiers()} - Classifiers API for text classification
+ * - {@link #getOcr()} - OCR API for optical character recognition
+ * - {@link #getObservability()} - Observability API for monitoring and analytics
+ * - {@link #getWorkflows()} - Workflows API for workflow management
  */
 public class Mistral extends ClientSDK {
     private Models models;
@@ -17,6 +33,8 @@ public class Mistral extends ClientSDK {
     private Embeddings embeddings;
     private Classifiers classifiers;
     private Ocr ocr;
+    private Observability observability;
+    private Workflows workflows;
 
     /**
      * Creates a new Mistral SDK client with the specified options.
@@ -152,5 +170,29 @@ public class Mistral extends ClientSDK {
             ocr = new Ocr(getOptions());
         }
         return ocr;
+    }
+
+    /**
+     * Gets the observability API.
+     *
+     * @return The observability API
+     */
+    public Observability getObservability() {
+        if (observability == null) {
+            observability = new Observability(getOptions());
+        }
+        return observability;
+    }
+
+    /**
+     * Gets the workflows API.
+     *
+     * @return The workflows API
+     */
+    public Workflows getWorkflows() {
+        if (workflows == null) {
+            workflows = new Workflows(getOptions());
+        }
+        return workflows;
     }
 }

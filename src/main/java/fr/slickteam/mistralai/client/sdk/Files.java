@@ -18,7 +18,17 @@ import static fr.slickteam.mistralai.client.utils.ContentTypes.APPLICATION_JSON;
 import static fr.slickteam.mistralai.client.utils.ContentTypes.OCTET_STREAM;
 
 /**
- * API resource for interacting with files.
+ * # Files API
+ * 
+ * API resource for managing files in Mistral AI.
+ * 
+ * ## Endpoints
+ * - `POST /v1/files` - [Upload a file](#upload)
+ * - `GET /v1/files` - [List all files](#list)
+ * - `GET /v1/files/{file_id}` - [Retrieve file info](#retrieve)
+ * - `DELETE /v1/files/{file_id}` - [Delete a file](#delete)
+ * - `GET /v1/files/{file_id}/content` - [Get file content](#content)
+ * - `GET /v1/files/{file_id}/url` - [Get file URL](#url)
  */
 public class Files extends ApiResource {
     private final ObjectMapper objectMapper;
@@ -37,9 +47,11 @@ public class Files extends ApiResource {
     }
 
     /**
-     * Upload File
+     * Upload a file that can be used across various endpoints.
      * <p>
      * The size of individual files can be a maximum of 512 MB. The Fine-tuning API only supports .jsonl files.
+     * <p>
+     * `POST /v1/files`
      *
      * @param file    The file to upload
      * @param purpose The purpose of the file
@@ -91,8 +103,9 @@ public class Files extends ApiResource {
     }
 
     /**
-     * List Files
      * Returns a list of files that belong to the user's organization.
+     * <p>
+     * `GET /v1/files`
      *
      * @param purpose Optional filter by purpose
      * @return A list of files
@@ -121,8 +134,9 @@ public class Files extends ApiResource {
     }
 
     /**
-     * Retrieve File
      * Returns information about a specific file.
+     * <p>
+     * `GET /v1/files/{file_id}`
      *
      * @param fileId The ID of the file to retrieve
      * @return Information about the file
@@ -146,7 +160,9 @@ public class Files extends ApiResource {
     }
 
     /**
-     * Delete File
+     * Delete a file.
+     * <p>
+     * `DELETE /v1/files/{file_id}`
      *
      * @param fileId The ID of the file to delete
      * @return The deletion status
@@ -170,7 +186,9 @@ public class Files extends ApiResource {
     }
 
     /**
-     * Download File
+     * Get file content.
+     * <p>
+     * `GET /v1/files/{file_id}/content`
      *
      * @param fileId The ID of the file to download
      * @return The file content as an input stream
@@ -194,7 +212,9 @@ public class Files extends ApiResource {
     }
 
     /**
-     * Get Signed Url
+     * Get a signed URL for file access.
+     * <p>
+     * `GET /v1/files/{file_id}/url`
      *
      * @param fileId The ID of the file to get a signed URL for
      * @return The signed URL
