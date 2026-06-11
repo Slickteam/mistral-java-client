@@ -2,6 +2,11 @@ package fr.slickteam.mistralai.client.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Chat message content.
+ * <p>
+ * Represents the content of a chat message with type, text, and document URL.
+ */
 public class ChatMessageContent {
 
     private String type;

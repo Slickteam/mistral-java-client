@@ -1,5 +1,12 @@
 package fr.slickteam.mistralai.client.model;
 
+/**
+ * Moderation LLM v2 configuration.
+ * <p>
+ * Used in Mistral AI API operations.
+ */
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import fr.slickteam.mistralai.client.type.ModerationLLMAction;
 

@@ -1,5 +1,12 @@
 package fr.slickteam.mistralai.client.model;
 
+/**
+ * Moderation LLM v1 category thresholds.
+ * <p>
+ * Used in Mistral AI API operations.
+ */
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

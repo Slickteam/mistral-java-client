@@ -1,5 +1,12 @@
 package fr.slickteam.mistralai.client.model;
 
+/**
+ * Chat message response.
+ * <p>
+ * Used in Mistral AI API operations.
+ */
+
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.slickteam.mistralai.client.model.ToolCall;
 

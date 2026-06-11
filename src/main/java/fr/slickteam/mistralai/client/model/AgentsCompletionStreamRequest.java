@@ -1,5 +1,12 @@
 package fr.slickteam.mistralai.client.model;
 
+/**
+ * Agents completion stream request.
+ * <p>
+ * Used in Mistral AI API operations.
+ */
+
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.slickteam.mistralai.client.model.Tool;
 

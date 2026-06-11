@@ -1,5 +1,12 @@
 package fr.slickteam.mistralai.client.model;
 
+/**
+ * Document output.
+ * <p>
+ * Used in Mistral AI API operations.
+ */
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.Map;
 import java.util.UUID;

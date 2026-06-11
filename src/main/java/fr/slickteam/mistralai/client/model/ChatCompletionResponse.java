@@ -1,5 +1,12 @@
 package fr.slickteam.mistralai.client.model;
 
+/**
+ * Chat completion response.
+ * <p>
+ * Used in Mistral AI API operations.
+ */
+
+
 import fr.slickteam.mistralai.client.model.Usage;
 
 import java.util.List;

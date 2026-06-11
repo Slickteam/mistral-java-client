@@ -1,5 +1,10 @@
 package fr.slickteam.mistralai.client.model;
 
+/**
+ * Moderation category scores.
+ * <p>
+ * Used in moderation responses to indicate severity scores per category.
+ */
 public class ModerationCategoryScores {
     public double sexual;
     public double hate;

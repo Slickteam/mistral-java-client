@@ -2,6 +2,11 @@ package fr.slickteam.mistralai.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * Guardrail configuration.
+ * <p>
+ * Used to configure moderation and safety guardrails.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record GuardrailConfig(
     Boolean block_on_error,

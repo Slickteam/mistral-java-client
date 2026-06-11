@@ -1,5 +1,10 @@
 package fr.slickteam.mistralai.client.model;
 
+/**
+ * Moderation category flags.
+ * <p>
+ * Used in moderation responses to indicate content categories.
+ */
 public class ModerationCategories {
     public boolean sexual;
     public boolean hate;

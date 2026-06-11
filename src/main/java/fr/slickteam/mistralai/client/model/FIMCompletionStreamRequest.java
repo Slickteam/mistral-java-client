@@ -1,5 +1,12 @@
 package fr.slickteam.mistralai.client.model;
 
+/**
+ * FIM completion stream request.
+ * <p>
+ * Used in Mistral AI API operations.
+ */
+
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static fr.slickteam.mistralai.client.utils.JSONUtils.escapeJsonString;

@@ -5,6 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Moderation response.
+ * <p>
+ * Returned by moderation endpoints.
+ */
 public record ModerationResponse(
     String id,
     String model,

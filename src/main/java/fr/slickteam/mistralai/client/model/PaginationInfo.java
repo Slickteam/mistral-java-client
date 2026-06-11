@@ -1,5 +1,12 @@
 package fr.slickteam.mistralai.client.model;
 
+/**
+ * Pagination information.
+ * <p>
+ * Used in Mistral AI API operations.
+ */
+
+
 public record PaginationInfo(
     Integer total_items,
     Integer total_pages,
